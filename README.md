@@ -11,6 +11,12 @@
 4、自己更新方法：
 
 （1）打开[www.bitinfocharts.com] 各数据页面查看源文件。
+ - *price.txt:* [https://bitinfocharts.com/zh/comparison/bitcoin-price.html] The bitcoin price in USD per day. 
+ - *sentaddr.txt:* [https://bitinfocharts.com/zh/comparison/sentbyaddress-btc.html] Number of unique active addresses per day. 
+ - *transaction.txt:* [https://bitinfocharts.com/zh/comparison/bitcoin-transactions.html] Number of transactions in BTC blockchain per day. 
+ - *difficulty.txt:* [https://bitinfocharts.com/zh/comparison/bitcoin-difficulty.html] Average mining difficulty per day. 
+ - *gtrend.txt:* [https://bitinfocharts.com/zh/comparison/google_trends-btc.html] (需补充数据) Google Trends to "Bitcoin".
+ - *tweets.txt:* [https://bitinfocharts.com/zh/comparison/tweets-btc.html] Tweets per day #Bitcoin.
 
 （2）将最新数据整理到各对应的.txt文件中，注意最新日期要相同，数据不足地需补充。
 
@@ -19,6 +25,8 @@
 （4）打开index.htm或原index.html即可，刷新加载data.json。
 
 5、更多交流可微博私信 [www.jdoge.com] 。
+
+2020/4/8
 
 
 ### What's this?
