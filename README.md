@@ -1,5 +1,16 @@
 # Bitcoin Bubble Index
 
+### @玛雅cndx 对代码fork更新的说明
+1、访问 [www.btcie.com/bubble] 查看更新
+2、改进点一：优化了下显示界面。
+3、改进点二：将原始数据放在同一目录，即original_data文件夹可删除了。
+4、自己更新方法：
+（1）打开[bitinfocharts.com]各数据页面查看源文件。
+（2）将最新数据整理到各对应的.txt文件中，注意最新日期要相同，数据不足地需补充。
+（3）点击process_data.py文件，若无问题，即可生成新的data.json，即可完成更新。
+（4）打开index.htm或原index.html即可，刷新加载data.json。
+5、更多交流可微博 [jdoge.com]
+
 ### What's this?
 
 This project provides a visualization analysis tool for price bubble of Bitcoin, including basic price information, 60-days accumulative increase, hot keywords index, and bubble index. We accumulated the original data (`2010/07/17` - `2020/03/09`) and put them into `/original_data` folder, and we visualize our analysis result using [echarts][1].
