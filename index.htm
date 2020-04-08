@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>比特币泡沫指数 BtcIE.com/bubble</title>
+    <meta charset="utf-8">
+	<link rel="shortcut icon" href="../favicon.ico"/>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="echarts.js"></script>
+	<style type="text/css">
+body {
+	font-size:14px;
+	letter-spacing: 0.05em;
+	/*background-color: #CECECE;
+	background-color: rgb(123, 134, 141);*/
+	margin: 0;
+	padding: 0;
+	color: #555;
+	min-width:220px;
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 20px;  PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-FAMILY: Microsoft YaHei, Helvetica, Tahoma;  PADDING-TOP: 0px;
+}
+A:visited {
+	COLOR: #006600; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #006600; TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #006600; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff6600; text-deroration: none;
+position: relative; left: 1px; top: 1px; clip:rect(   )
+}
+@font-face{font-family:"BTC";src:url(BTC.ttf) format('truetype');}
+.btc{font-family:"BTC";line-height:initial;}
+</style>
+</head>
+<body>
+<center><h1>比特币泡沫指数 <span class="btc">B</span>tcIE.com/bubble</h1>
+<h3><a href=https://github.com/aksnzhy/bitcoin-bubble-index target=_blank>Github开源</a>  <a href=index.htm target=_blank>原图</a>  <a href=https://weibo.com/1633615122/IjEHRzxb8?type=repost#_rnd1575701882357 target=_blank>提出者:@马超Terminal</a></h3>
+<div id="main" style="width:96%;max-width:1200px; height:1600px"></div></center>
+    <script type="text/javascript" src="data.json?47"></script>
+    <script type="text/javascript">
+        // Get data from json file
+    	var mydata = JSON.parse(data);
+        var timeData = mydata.date;
+        var priceData = mydata.price;
+        var growData = mydata.growth_60_day;
+        var hotData = mydata.hot;
+        var bubbleData = mydata.bubble
+        // Init echarts
+        var myChart = echarts.init(document.getElementById('main'));
+        // set option
+        var option = {
+            title: {
+                text: '',
+                x: 'center'
+            },    
+            axisPointer: {
+                link: {xAxisIndex: 'all'}
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            legend: {
+                right: 160,
+                top: 50,
+                data:['线性 ','对数 '],
+            },
+            dataZoom: [{
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100,
+                xAxisIndex: [0,1,2,3]
+            }],
+            grid: [{
+                left: 80,
+                top: '2%',
+                height: '18%'
+            },{
+                left: 80,
+                top: '24%',
+                height: '12%'
+            },{
+                left: 80,
+                top: '40%',
+                height: '25%'
+            },{
+                left: 80,
+                top: '70%',
+                height: '25%'
+            }],
+            xAxis: [{
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 1,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 2,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }, {
+                gridIndex: 3,
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }],
+            yAxis: [
+                {
+                    name : '     比特币价格 BTC Price (USD)',
+                    type : 'value'
+                },
+                {
+                    type : 'log'
+                },                
+                {
+                    gridIndex: 1,
+                    name : '     比特币泡沫指数 Bubble Index',
+                    type : 'value'
+                },
+                {
+                    gridIndex: 2,
+                    name : '          变动百分比 60 days Increase(%)',
+                    type : 'value'
+                },
+                {
+                    gridIndex: 3,
+                    name : '          热度 Hot Keywords(谷歌+推特)',
+                    type : 'log'
+                }
+            ],
+            series : [
+                {
+                    yAxisIndex : 1,
+                    name : '对数 ',
+                    type : 'line',
+                    hoverAnimation : false,
+                    data : priceData,
+                    markLine: {
+                        data: [{
+                           name: 'first halfing',
+                           xAxis: '2012/11/28'
+                        }, {
+                           name: 'second halfing',
+                           xAxis: '2016/07/10'
+                        }]
+                    }
+                },
+                {
+                    name : '线性 ',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : priceData
+                },
+                {
+                    xAxisIndex: 1,
+                    yAxisIndex: 2,
+                    name : '泡沫指数Bubble ',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : bubbleData
+                },
+                {
+                    xAxisIndex: 2,
+                    yAxisIndex: 3,
+                    name : '60天波动率(%)',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : growData
+                },
+                {
+                    xAxisIndex: 3,
+                    yAxisIndex: 4,
+                    name : '关键词热度 ',
+                    type : 'line',
+                    smooth : true,
+                    hoverAnimation : false,
+                    data : hotData
+                }
+            ]
+        }
+        myChart.setOption(option);
+    </script><br>
+	<br><br>
+	<div style="width: 100%; height: 5%; margin: 5 auto; text-align:center" >比特币<span class="btc">BTC</span>浏览</b>&nbsp;<span class="btc">B</span>tcie.com  <span id="menu"></span><script src="https://btcie.com/ahr999/menu.js"></script>
+</div> 
+<DIV style="DISPLAY: none" id=the_baidu><script type="text/javascript"> 
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe01b40878de0f7a53447138d441d4ddf' type='text/javascript'%3E%3C/script%3E"));
+</script></DIV>
+</body>
+</html>
